@@ -1,0 +1,194 @@
+ctrl + shift +F7 查找使用
+ComponentsConfiguration.R
+
+svn checkout https://192.168.1.252:8443/svn/mtk/GM01/CTCC_Version/GM01_CT_NEW 
+
+李家仁 20:52:13
+=========================================================
+MTK Online:
+网址:https://onlinesso.mediatek.com/_layouts/15/mol/ui/ext/home.aspx
+账号:peter.cai@techainsh.com
+密码:techainshsw0
+=========================================================
+MTK eService：
+网址:http://eservice.mediatek.com/eservice/pub/EServicePubApp.html?param=1
+账号: peter_cai_techain
+密码: techainshsw1
+
+账号：android5_guo_ausshine
+密码： aussw3511
+
+//这个
+账号：   andrew_chen_ausshine
+密码 ：  ausshinesw1
+=========================================================
+MTK file Download:
+网址:https://sso.mediatek.com/fex/DownloadList.aspx
+账号:techainsh-05 
+密码:techainsh-05
+
+https://fex.mediatek.com/DownloadFiles.aspx?
+ FEX账号：
+用户名：ausshine-2
+密码：aussw3511
+=========================================================
+MTK dcc:
+网址:http://dcc.mediatek.com
+账号:peter.cai@techainsh.com
+密码:
+=========================================================
+MTK文件下载系统网址变了，以下是网址和登陆账号密码
+
+https://transfer.mediatek.com/
+android.guo@ausshine.com    
+aussw3511
+=========================================================
+
+mtk下载文档密码： 0362531716  
+
+
+find ./ -name "*.h" | xargs -n50 grep MtkCamMsgExtDataHelper  查找.h文件，且文件中有MtkCamMsgExtDataHelper 字符串
+find -name "MtkCamera.h"  查找MtkCamera.h文件
+find . |xargs grep -ri "IBM"
+
+
+xxhdpi
+=========================
+LOCAL_JACK_ENABLED := disabled
+
+mtk下载文档密码： 0362531716
+
+
+repo init -u  ssh://gerrit@192.168.59.6:29418/gome/manifest -b mtk_7.0_6750
+
+==========
+git remote add NJ ssh://zhanghuancheng@192.168.63.219:29418/AOSP/vendor/mediatek/proprietary/packages
+git push NJ HEAD:refs/for/gm_7.0_mtk6750_develop
+===============================
+adb shell am force-stop com.mediatek.camera
+
+===============================================
+C++中如何获取call stack:
+#include <utils/CallStack.h>
+
+android::CallStack stack;
+stack.update();
+stack.log("zhc here");
+
+======================================================
+以下两个文件修改一下
+ALPS-MP-M0.MP7-V3.28.1_AUS6750_66_M_INHOUSE\art\build\Android.common_build.mk
+ART_HOST_CLANG := false
+ifneq ($(WITHOUT_HOST_CLANG),false)
+  # By default, host builds use clang for better warnings.
+  ART_HOST_CLANG := false
+endif
+
+device\mediatek\common\sepolicy\teei_daemon.te
+#define for mlsconstrain
+#typeattribute teei_client_device mlstrustedobject;
+
+=================================================
+java 版本切换
+
+update-alternatives --config java  
+update-alternatives --config javac   
+update-alternatives --config javap
+=========================================================
+
+新同事的亿赛通账号开通完毕，账号为邮箱前缀，密码12345678
+
+
+=============================================
+svn 
+用户名：huancheng.zhang
+密码：huancheng.zhang
+
+========================================
+RuntimeException runtimeException = new RuntimeException("zhc is here: ");
+runtimeException.fillInStackTrace();
+android.util.Log.d(TAG, "zhc: ", runtimeException);
+
+
+==================================
+查看应用启动时间
+adb shell am start -W -n com.mediatek.camera/com.android.camera.CameraActivity
+
+View decorView = getWindow().getDecorView();
+        int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
+        decorView.setSystemUiVisibility(uiOptions);
+		
+		
+================================
+南京镜像同步上海任务完毕，以下说明（GM02—7.0）
+
+拉取方式:
+gm_7.0_mtk6750_develop：  repo init -u  ssh://账户名@192.168.59.30:29418/gome/manifest  -b gm_7.0_mtk6750_develop
+mtk_7.0_6750：                         repo init -u  ssh://账户名@192.168.59.6:29418/gome/manifest  -b  mtk_7.0_6750
+repo init -u ssh://zhanghuancheng@192.168.59.30:29418/aosp/gome/manifest -m default.xml -b GM12B_7.1_mtk6757cd_develop
+
+push方式：
+gm_7.0_mtk6750_develop： 
+在提交的库中添加南京远程服务器：（举例 abi/cpp库：）  
+git remote add   NJ   ssh://账户名@192.168.63.219:29418/AOSP/abi/cpp  ;  
+(git remote -v 查下上海origin远程路径；南京远程路径只少了NJ/ 这层目录，看附件图片，如果远程地址不对，是无法push的)
+git add ;
+git commit ;
+git push NJ HEAD:refs/for/gm_7.0_mtk6750_develop
+
+
+mtk_7.0_6750：    同上     （举例 abi/cpp库：）  
+git remote add   NJ   ssh://账户名@218.94.144.194:29418/AOSP/abi/cpp  ;  
+(git remote -v 查下上海origin远程路径；南京路径只少了NJ/ 这层目录)
+git add ;
+git commit ;
+git push NJ HEAD:refs/for/mtk_7.0_6750 
+
+
+git remote -v 查看上海origin远程地址
+git remote add 添加远程地址，基本结构要与 上海origin远程地 保持一致
+
+	根目录下执行：repo forall -c git config core.fileMode false	
+	模块目录下执行：git config --global core.filemode false
+
+==============
+adb root && adb remount && java -jar signapk.jar platform.x509.pem platform.pk8 VideoBrowserActivity.apk VideoPlayer_IUV.apk && adb push D:\Cold\SignApk01\VideoPlayer_IUV.apk system/priv-app/VideoPlayer_IUV 
+adb shell pm clear com.hct.videoplayer
+
+
+=====================================
+copy E:\VideoPlyaer\VideoPlayer\VideoBrowserActivity\bin\VideoBrowserActivity.apk VideoBrowserActivity.apk /y && java -jar signapk.jar platform.x509.pem platform.pk8 VideoBrowserActivity.apk VideoPlayer_IUV.apk && adb install -r E:\VideoPlyaer\VideoPlayer\SignApk01\VideoPlayer_IUV.apk
+
+
+
+===================
+adb push Z:\zhanghuancheng\gm_2_0_develop\out\target\product\aus6750_66_n\system\vendor\app\Camera\Camera.apk vendor/app/Camera && adb shell am force-stop com.mediatek.camera
+
+adb push Z:\zhanghuancheng\gm12b\out\target\product\tk6757_66_n1\system\app\Camera\Camera.apk system/app/Camera && adb shell am force-stop com.mediatek.camera
+adb push Z:\zhanghuancheng\gm13C\out\target\product\aus6750_66_n\system\vendor\app\Camera\Camera.apk ./vendor/operator/app/Camera/ && adb shell am force-stop com.mediatek.camera
+
+=========打补丁
+patch -p1 < patch1.diff
+
+
+public void onMultiWindowModeChanged(boolean isInMultiWindowMode) {
+
+=================== monkey 测试
+adb shell monkey -p com.hct.videoplayer 10000
+
+=================== 视频 jira 过滤器
+status in (Open, "In Progress", Reopened) AND component = 视频 AND assignee in (currentUser()) ORDER BY due ASC, updated DESC
+=================== 相机 jira 过滤器
+status in (Open, "In Progress", Reopened) AND component = 相机 AND assignee in (currentUser()) ORDER BY due ASC, updated DESC
+
+./hprof-conv xxx-a.hprof xxx-b.hprof
+
+//开启mtklogger
+adb shell am start -n com.mediatek.mtklogger/.MainActivity
+
+ALOGD("****chenshiyun**** , %s ,line:%d",__func__,__LINE__);
+
+persist.mtk.camera.log_level  5
+
+AS：快捷键
+Ctrl + Alt + 左键： 跳转到接口方法的实现
